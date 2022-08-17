@@ -62,10 +62,3 @@ def password_strength(password):
 
     return checking_list
 
-
-
-    # number = 10
-    # if len(string) >= number:
-    #     return True
-    # else:
-    #     return False

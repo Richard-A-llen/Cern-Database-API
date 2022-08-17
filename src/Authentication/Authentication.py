@@ -1,5 +1,6 @@
 import csv
 import Classes as Cls
+import sqlite3
 
 
 def add_user(details: list):
@@ -22,7 +23,7 @@ def create_user_object(user_name):
         for line in csv_reader:
             if line[0] == user_name:
                 # The user has an administrator status.
-                if line[4] == 'True':
+                if line[4] == 1:
                     user_object = Cls.Administrator(line[2], line[3], line[0],
                                                     line[1], line[4])
                     return user_object
