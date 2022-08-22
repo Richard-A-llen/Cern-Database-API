@@ -17,7 +17,8 @@ def log_in():
             inp = username_fn()
         # does username exist in the database?
         user_name_verification = Ac.user_exists(inp)
-        if user_name_verification is not True:
+        # if user_name_verification is not 1:
+        if user_name_verification != 1:
             print('the user name does not exist. Try again.')
             inp = username_fn()
 
@@ -71,7 +72,7 @@ def sing_up():
             print(" No space is allowed, try again")
             inp = username_fn()
         # does the username name exist in the database?
-        if Ac.user_exists(inp) is True:
+        if Ac.user_exists(inp) == 1:
             print('User name already exists. Provide a different one: ')
             inp = username_fn()
         return inp
@@ -102,7 +103,7 @@ def sing_up():
     email = email_fn()
     username = username_fn()
     password = password_fn()
-    return [username, password, name, email, False]
+    return [username, password, name, email, 0]
 
 
 
