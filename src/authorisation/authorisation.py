@@ -10,7 +10,7 @@ class AuthorisationType(Enum):
 
 class Authorisation:
     
-    def __init__(self, userManager, AuthorisationDataBase):
+    def __init__(self, sessionManager, AuthorisationDataBase):
         self._permissions = { 
             AuthorisationType.READING: self._reading_permission,
             AuthorisationType.WRITING: self._writing_permission,
@@ -18,49 +18,49 @@ class Authorisation:
             AuthorisationType.DOWNLOADING: self._downloading_permission,
             AuthorisationType.DELETING: self._deleting_permission
         }
-        self._userManager = userManager
+        self._sessionManager = sessionManager
         self._authorisationDataBase = AuthorisationDataBase
 
     def has_premission(self, user_name, permission_type: AuthorisationType, **kwargs) -> bool:
         # query user login status
-        if user_info := self._userManager(user_name):
+        if user_info := self._sessionManager.get(user_name):
             if f := self._permissions.get(permission_type):
-                return f(user_info, kwargs)
+                return f(user_info, **kwargs)
 
         return False
 
-    def _common_checking(self, f, user_info, **kwargs):
-        file = kwargs.get(file)
-        if not file or not exists(file) or isfile(file):
+    def _common_file_checking(self, f, user_info, **kwargs):
+        file = kwargs.get("file")
+        if not file or not exists(file) or not isfile(file):
             # no file parameters or file not exists or not a file
             return False
         
         user_list = f(file)
-        if user_info.name in user_list:
+        if user_info.name in user_list or user_info.is_admin:
             return True
         
         return False
     
     def _reading_permission(self, user_info, **kwargs):
-        return self._common_file_checking(self._authorisationDataBase.get_reading, user_info, kwargs)
+        return self._common_file_checking(self._authorisationDataBase.get_reading, user_info, **kwargs)
 
     def _writing_permission(self, user_info, **kwargs):
-        return self._common_file_checking(self._authorisationDataBase.get_writing, user_info, kwargs)
+        return self._common_file_checking(self._authorisationDataBase.get_writing, user_info, **kwargs)
 
     def _downloading_permission(self, user_info, **kwargs):
-        return self._common_file_checking(self._authorisationDataBase.get_downloading, user_info, kwargs)
+        return self._common_file_checking(self._authorisationDataBase.get_downloading, user_info, **kwargs)
     
     def _deleting_permission(self, user_info, **kwargs):
-        return self._common_file_checking(self._authorisationDataBase.get_deleting, user_info, kwargs)
+        return self._common_file_checking(self._authorisationDataBase.get_deleting, user_info, **kwargs)
 
     def _uploading_permission(self, user_info, **kwargs):
-        folder = kwargs.get(file)
-        if not folder or not exists(folder) or isdir(folder):
+        folder = kwargs.get("file")
+        if not folder or not exists(folder) or not isdir(folder):
             # no file parameters or file not exists
             return False
         
-        user_list = _authorisationDataBase.get_uploading(folder)
-        if user_info.name in user_list:
+        user_list = self._authorisationDataBase.get_uploading(folder)
+        if user_info.name in user_list or user_info.is_admin:
             return True
         
         return False
