@@ -13,7 +13,7 @@ def create_table():
 
 
 def sql_add_user(details: list):
-    """This function adds a user to the database"""
+    """This function adds a user to the database."""
 
     conn = sqlite3.connect('C:/Users/grzeg/PycharmProjects/Authentication/'
                            'database_file.db')
@@ -51,6 +51,8 @@ def sql_user_exist(username):
 
 
 def sql_password_correct(username):
+    """This function checks if password that has been provided by a user is
+    valid, i.e. its hashed value is equal to those stored in the database."""
 
     conn = sqlite3.connect('C:/Users/grzeg/PycharmProjects/Authentication/'
                            'database_file.db')
@@ -58,6 +60,8 @@ def sql_password_correct(username):
     result = c.execute(f"""SELECT password FROM users WHERE username = 
     '{username}';""")
     result_to_return = result.fetchone()
+    conn.commit()
+    conn.close()
     return result_to_return[0]
 
 
@@ -70,14 +74,25 @@ def sql_print_all():
     c = conn.cursor()
     c.execute("""SELECT * FROM users;""")
     rows = c.fetchall()
+    conn.commit()
+    conn.close()
     for row in rows:
         print(row)
         user_list.append(row)
     return user_list
 
-sql_print_all()
 
+def sql_change_user_status(selected_user):
+    """This function upgrade a chosen user to be an administrator.
+    This function can be use by an existing administrator only."""
 
+    conn = sqlite3.connect('C:/Users/grzeg/PycharmProjects/Authentication/'
+                           'database_file.db')
+    c = conn.cursor()
+    c.execute(f"""UPDATE users SET admin = 1 WHERE username =
+     '{selected_user}';""")
+    conn.commit()
+    conn.close()
 
 
 
