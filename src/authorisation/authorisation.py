@@ -21,7 +21,7 @@ class Authorisation:
         self._sessionManager = sessionManager
         self._authorisationDataBase = AuthorisationDataBase
 
-    def has_premission(self, user_name, permission_type: AuthorisationType, **kwargs) -> bool:
+    def has_permission(self, user_name, permission_type: AuthorisationType, **kwargs) -> bool:
         # query user login status
         if user_info := self._sessionManager.get(user_name):
             if f := self._permissions.get(permission_type):
