@@ -5,6 +5,7 @@ from Authentication import add_user, create_user_object
 
 
 def main():
+    """This function starts the script."""
 
     print("*"*80 + "\n Welcome in personal CERN application (pCERNa). Choose "
           "one of the options below:" + "\n" + "*" * 80 + "\n [1] to log-in "

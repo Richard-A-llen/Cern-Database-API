@@ -1,9 +1,13 @@
 import csv
 import hashlib as hl
 import string as s
+import Database.database_managment as DB
 
 
 def hashing(password):
+    """Function transforms password into its hash version to be stored
+    in the database."""
+
     password_hash = hl.sha256(str.encode(password)).hexdigest()
     return password_hash
 
@@ -12,26 +16,19 @@ def user_exists(user_name):
     """This function checks if user name exists. It returns true if it does,
     otherwise it return false."""
 
-    with open('users.csv') as file:
-        csv_reader = csv.reader(file, delimiter=',')
-        for line in csv_reader:
-            if line[0] == user_name:
-                return True
-        return False
+    result = DB.sql_user_exist(user_name)
+    return result
 
 
 def password_correct(user_name, password):
     """This function checks if user name exists. It returns true if it does,
     otherwise it return false."""
 
-    with open('users.csv') as file:
-        csv_reader = csv.reader(file, delimiter=',')
-        for line in csv_reader:
-            if line[0] == user_name:
-                if line[1] == hashing(password):
-                    return True
-                else:
-                    return False
+    result = DB.sql_password_correct(user_name)
+    if result == hashing(password):
+        return True
+    else:
+        return False
 
 
 def password_strength(password):
@@ -61,4 +58,3 @@ def password_strength(password):
             checking_list[4] = True
 
     return checking_list
-
