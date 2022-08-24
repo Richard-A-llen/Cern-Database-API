@@ -1,38 +1,38 @@
 from threading import Lock
 import copy
 
-class AuthorisationData:
+# class AuthorisationData:
 
-    def __init__(self):
-        self.reading = set()
-        self.writing = set()
-        self.deleting = set()
-        self.uploading = set()
-        self.downloading = set()
+#     def __init__(self):
+#         self.reading = set()
+#         self.writing = set()
+#         self.deleting = set()
+#         self.uploading = set()
+#         self.downloading = set()
 
 
 class AuthorisationDataBase:
 
-    def __init__(self):
-        self._records = {}
+    def __init__(self, records):
+        self._records = records
         self._lock = Lock()
 
     def _common_updating(self, file, user_list: list, column_name, adding: bool):
         with self._lock:
             if not self._records.get(file):
-                self._records[file] = AuthorisationData()
+                return
             
             columns = {
-                "reading": self._records[file].reading,
-                "writing": self._records[file].writing,
-                "deleting": self._records[file].deleting,
-                "uploading": self._records[file].uploading,
-                "downloading": self._records[file].downloading
+                "reading": self._records.get(file).get("reading"),
+                "writing": self._records.get(file).get("writing"),
+                "deleting": self._records.get(file).get("deleting"),
+                "uploading": self._records.get(file).get("uploading"),
+                "downloading": self._records.get(file).get("downloading")
             }
             for user in user_list:
-                if adding:
-                    columns.get(column_name).add(user)
-                else:
+                if adding and user not in columns.get(column_name):
+                    columns.get(column_name).append(user)
+                elif not adding and user in columns.get(column_name):
                     columns.get(column_name).remove(user)
 
     def update_reading(self, file, user_list: list, adding=True):
@@ -47,18 +47,18 @@ class AuthorisationDataBase:
     def update_uploading(self, file, user_list: list, adding=True):
         self._common_updating(file, user_list, "uploading", adding)
     
-    def update_uploading(self, file, user_list: list, adding=True):
+    def update_downloading(self, file, user_list: list, adding=True):
         self._common_updating(file, user_list, "downloading", adding)
 
     def _common_get(self, file, column):
         with self._lock:
             if self._records.get(file):
                 columns = {
-                    "reading": self._records[file].reading,
-                    "writing": self._records[file].writing,
-                    "deleting": self._records[file].deleting,
-                    "uploading": self._records[file].uploading,
-                    "downloading": self._records[file].downloading
+                    "reading": self._records.get(file).get("reading"),
+                    "writing": self._records.get(file).get("writing"),
+                    "deleting": self._records.get(file).get("deleting"),
+                    "uploading": self._records.get(file).get("uploading"),
+                    "downloading": self._records.get(file).get("downloading")
                 }
                 return copy.deepcopy(columns.get(column))
         return None
