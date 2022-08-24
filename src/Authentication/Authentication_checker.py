@@ -1,6 +1,6 @@
 import hashlib as hl
 import string as s
-import src.Authentication.database_managment as DB
+import database_managment as DB
 
 
 def hashing(password):
