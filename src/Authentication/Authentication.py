@@ -1,5 +1,5 @@
 import Classes as Cls
-import src.Authentication.database_managment as DB
+import database_managment as DB
 import sqlite3
 
 

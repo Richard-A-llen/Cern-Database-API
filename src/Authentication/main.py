@@ -1,4 +1,3 @@
-# shell with while
 from Input_checker import log_in, sing_up
 from Authentication import add_user, create_user_object
 
