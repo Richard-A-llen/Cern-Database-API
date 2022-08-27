@@ -23,11 +23,11 @@ class SessionManager:
         """
 
         with self._rwlock.gen_wlock():  # write lock
-            for _, user_info in self._sessions.items():
+            for session, user_info in self._sessions.items():
                 if user.name == user_info.name:
                     # just extend the session live time
                     user_info.login_time = int(time.time())
-                    return
+                    return session
 
             # new user case
             login_time = int(time.time())
