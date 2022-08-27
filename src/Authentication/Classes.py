@@ -1,4 +1,4 @@
-
+import database_managment as dbm
 
 class User:
     """This class stores users details. After log-in the information about
@@ -17,7 +17,7 @@ class User:
 
     def __repr__(self):
         """This is a graphical representation of an object"""
-        return f"{self.__user_name}"
+        return f"{self.user_name}"
 
 
 class Administrator(User):
@@ -25,7 +25,14 @@ class Administrator(User):
     def __init__(self, __name, __email, __user_name, __password, admin=1):
         super().__init__(__name, __email, __user_name, __password, admin)
 
-    # getters and setters have to be added. And only admin can use them!
+    def delete_user(self, selected_user):
+        dbm.sql_delete_user(selected_user)
+
+    def change_user_status(self, selected_user):
+        dbm.sql_change_user_status(selected_user)
+
+
+
 
 
 class Experiment:
