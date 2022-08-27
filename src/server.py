@@ -34,6 +34,8 @@ class RequestType(Enum):
     DOWNLOAD = "download"
     UPLOAD = "upload"
     DELETE = "delete"
+    CREATE = "create"
+    UPDATE = "update"
 
 
 # bind request to a specific handler
@@ -43,6 +45,8 @@ request_handlers = {
     RequestType.DOWNLOAD.value: download_test,
     RequestType.UPLOAD.value: dump_func,
     RequestType.DELETE.value: dump_func,
+    RequestType.CREATE.value: dump_func,
+    RequestType.UPDATE.value: dump_func,
 }
 
 
