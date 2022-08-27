@@ -1,5 +1,6 @@
 import Authentication_checker as Ac
 from Authentication_checker import hashing
+from Authentication import create_user_object, add_user
 
 
 def log_in():
@@ -36,7 +37,9 @@ def log_in():
 
     username = username_fn()
     password = password_fn(username)
-    return [username, password]
+    object = create_user_object(username)
+    print(f"Welcome {object.user_name}!")
+    return object
 
 
 def sing_up():
@@ -103,7 +106,9 @@ def sing_up():
     email = email_fn()
     username = username_fn()
     password = password_fn()
-    return [username, password, name, email, 0]
+    details = [username, password, name, email, 0]
+    add_user(details)
+
 
 
 
