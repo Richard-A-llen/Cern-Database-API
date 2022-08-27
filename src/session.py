@@ -17,7 +17,7 @@ class SessionManager:
         self._rwlock = rwlock.RWLockFairD()
         self._sessions = {}
 
-    def add(self, user) -> None:
+    def add(self, user):
         """Add user to the cache and get an unique id as session.
         if user has been there, it will extend the session expire time.
         """
@@ -36,6 +36,7 @@ class SessionManager:
             new_user_info = namedtuple("UserInfo", ["name", "is_admin", "login_time"],
                                        defaults=[user.name, user.is_admin, login_time])()
             self._sessions[session] = new_user_info
+            return session
 
     def get(self, session):
         """Query user data from session, return user info or None if session has no record
