@@ -7,7 +7,7 @@ class User:
     def __init__(self, __name, __email, __user_name, __password, admin=0):
         self.__name = __name
         self.__email = __email
-        self.__user_name = __user_name
+        self.user_name = __user_name
         self.__password = __password
         self.__admin = admin
 
