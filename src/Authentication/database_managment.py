@@ -15,8 +15,6 @@ def create_table():
 def sql_add_user(details: list):
     """This function adds a user to the database."""
 
-    # conn = sqlite3.connect('C:/Users/grzeg/PycharmProjects/Authentication/'
-    #                        'database_file.db')
     conn = sqlite3.connect('database_file.db')
     conn.set_trace_callback(print)
     c = conn.cursor()
@@ -40,8 +38,6 @@ def sql_user_exist(username):
     It returns int 0 if it does not.
     """
 
-    # conn = sqlite3.connect('C:/Users/grzeg/PycharmProjects/Authentication/'
-    #                        'database_file.db')
     conn = sqlite3.connect('database_file.db')
     c = conn.cursor()
     result = c.execute(f'''SELECT EXISTS(SELECT 1 FROM users WHERE username = 
@@ -56,8 +52,6 @@ def sql_password_correct(username):
     """This function checks if password that has been provided by a user is
     valid, i.e. its hashed value is equal to those stored in the database."""
 
-    # conn = sqlite3.connect('C:/Users/grzeg/PycharmProjects/Authentication/'
-    #                        'database_file.db')
     conn = sqlite3.connect('database_file.db')
     c = conn.cursor()
     result = c.execute(f"""SELECT password FROM users WHERE username = 
@@ -72,8 +66,7 @@ def sql_print_all():
     """This function prints all records form the users table in the database,
     and returns a list of all records."""
     user_list = []
-    # conn = sqlite3.connect('C:/Users/grzeg/PycharmProjects/Authentication/'
-    #                        'database_file.db')
+
     conn = sqlite3.connect('database_file.db')
     c = conn.cursor()
     c.execute("""SELECT * FROM users;""")
@@ -90,8 +83,6 @@ def sql_change_user_status(selected_user):
     """This function upgrade a chosen user to be an administrator.
     This function can be use by an existing administrator only."""
 
-    # conn = sqlite3.connect('C:/Users/grzeg/PycharmProjects/Authentication/'
-    #                        'database_file.db')
     conn = sqlite3.connect('database_file.db')
     c = conn.cursor()
     c.execute(f"""UPDATE users SET admin = 1 WHERE username =
@@ -100,7 +91,7 @@ def sql_change_user_status(selected_user):
     conn.close()
 
 
-def delete_user(selected_user):
+def sql_delete_user(selected_user):
     """This function deletes a chosen user from the database.
     This function can be use by an existing administrator only."""
 
@@ -111,7 +102,7 @@ def delete_user(selected_user):
     conn.close()
 
 sql_print_all()
-# delete_user('johnsmith')
+# sql_delete_user('johnsmith')
 
 
 
