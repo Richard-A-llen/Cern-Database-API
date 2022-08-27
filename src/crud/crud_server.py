@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 import crud
 from db_and_table import create_table
-from authorisation import AuthorisationDatabase
+
 
 # using JSON for data communication
 app = Flask(__name__) # making a flask app
