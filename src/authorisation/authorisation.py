@@ -1,5 +1,10 @@
 from enum import Enum, auto
 from os.path import exists, isfile, isdir
+from AuthorisationDataBase import AuthorisationDataBase
+
+import os, sys
+sys.path.append(os.path.dirname(__file__) + r"/../")
+from session import session_manager_singleton
 
 class AuthorisationType(Enum):
     READING = auto()
@@ -9,8 +14,8 @@ class AuthorisationType(Enum):
     DELETING = auto()
 
 class Authorisation:
-    
-    def __init__(self, sessionManager, AuthorisationDataBase):
+
+    def __init__(self, session_manager, authorisationDataBase):
         self._permissions = { 
             AuthorisationType.READING: self._reading_permission,
             AuthorisationType.WRITING: self._writing_permission,
@@ -18,14 +23,15 @@ class Authorisation:
             AuthorisationType.DOWNLOADING: self._downloading_permission,
             AuthorisationType.DELETING: self._deleting_permission
         }
-        self._sessionManager = sessionManager
-        self._authorisationDataBase = AuthorisationDataBase
+        self._session_manager = session_manager
+        print(self._session_manager)
+        self._authorisationDataBase = authorisationDataBase
 
     def has_permission(self, user_name, permission_type: AuthorisationType, **kwargs) -> bool:
         # query user login status
-        if user_info := self._sessionManager.get(user_name):
-            if f := self._permissions.get(permission_type):
-                return f(user_info, **kwargs)
+        if user_info := self._session_manager.get(user_name):
+            if _f := self._permissions.get(permission_type):
+                return _f(user_info, **kwargs)
 
         return False
 
@@ -34,13 +40,13 @@ class Authorisation:
         if not file or not exists(file) or not isfile(file):
             # no file parameters or file not exists or not a file
             return False
-        
+
         user_list = f(file)
         if user_info.name in user_list or user_info.is_admin:
             return True
-        
+
         return False
-    
+
     def _reading_permission(self, user_info, **kwargs):
         return self._common_file_checking(self._authorisationDataBase.get_reading, user_info, **kwargs)
 
@@ -49,7 +55,7 @@ class Authorisation:
 
     def _downloading_permission(self, user_info, **kwargs):
         return self._common_file_checking(self._authorisationDataBase.get_downloading, user_info, **kwargs)
-    
+
     def _deleting_permission(self, user_info, **kwargs):
         return self._common_file_checking(self._authorisationDataBase.get_deleting, user_info, **kwargs)
 
@@ -58,9 +64,12 @@ class Authorisation:
         if not folder or not exists(folder) or not isdir(folder):
             # no file parameters or file not exists
             return False
-        
+
         user_list = self._authorisationDataBase.get_uploading(folder)
         if user_info.name in user_list or user_info.is_admin:
             return True
-        
+
         return False
+
+
+authorisation_singleton = Authorisation(session_manager_singleton, None)
