@@ -17,6 +17,8 @@ Sign up and login steps take apropriate inpurs to create a user account
 or to allow for access to the database respectively. These functionalities
 are implemented by `log_in()` and `sing_up` functions in `Input_checker.py` file.
 * Upload/download (experiment data)
+
+Users can upload/download their files. The whole process is done using `insert_file()`, `update_file()`, `delete_file()` and `get_files()` functions.Every function is related to http methods located in `crud_server.py` file.
 ### Security Features
 Selected to demostrate SSD and based on the OWASP top ten security vulnerabilities this project incoporates the following security features.
 * Authentication
@@ -48,6 +50,7 @@ Parametrised queries seperate the data from the SQL statement to be compliled. A
 The programme requirements :
 * Python 3.10
 * Flask 2.2.2 
+* SQLite
 ### How to run
 Description of how to run the file
 ## 5. Structure
@@ -79,7 +82,8 @@ list of file and brief Description of functionality
 * `db_and_table.py`
 
 ## 7. Tests
-Mention all the different tests performed with code examples
+* Unittest
+* Insomnia 
 ## 8. How to Use
 Simple step by step guide to how to use the app. How to sign up , login in , upload a file encryption
 ## 9. References
