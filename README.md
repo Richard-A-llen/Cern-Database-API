@@ -29,7 +29,6 @@ algorithm (`hashing()` in `Authentication_checker.py`) on the input-password and
 compares it with a hashed password stored in the database (search takes place 
 based on username as a primary key). If these two passwords are the same, then 
 logging-in is successful and `log_in()` returns a user object.
-done.
 
 * Hashing  
   
