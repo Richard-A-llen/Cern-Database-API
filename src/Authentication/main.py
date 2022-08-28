@@ -1,6 +1,13 @@
-from Input_checker import log_in, sing_up
-from Authentication import add_user, create_user_object
+"""
+This module is a playground to test Authentication as a separated,
+individual module form the software we provided. To check the
+functionalities within the authentication module (login and sign up),
+this file (main.py) has to be executed.
+author: G. Pikus
+"""
 
+from Input_checker import log_in, sing_up
+from main_user import user_managment
 
 
 def main():
@@ -14,9 +21,23 @@ def main():
     inp = input()
 
     if inp == '1':
-        user = log_in()
+        inp1 = input("Provide a username: ")
+        inp2 = input("Provide a password: ")
+        try:
+            user = log_in(inp1, inp2)
+            user_managment(user)
+        except RuntimeError:
+            print("*"*80)
     elif inp == '2':
-        user_data = sing_up()
+        inp1 = input("Provide your first name and last name separaded "
+                     "by space: ")
+        inp2 = input("Provide your CERN e-mail: ")
+        inp3 = input("Provide your username: ")
+        inp4 = input("Provide your password: ")
+        try:
+            user_data = sing_up(inp1, inp2, inp3, inp4)
+        except RuntimeError:
+            print("*" * 80)
     elif inp == '3':
         main()
     elif inp == 'exit':
