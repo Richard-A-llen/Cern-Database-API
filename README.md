@@ -13,7 +13,7 @@ We have used Flask to build a web application microservice.
 * User menu (command line input)
 * Sign up/login
   
-Sign up and login steps takes apropriate inpurs to create a user account 
+Sign up and login steps take apropriate inpurs to create a user account 
 or to allow for access to the database respectively. These functionalities
 are implemented by `log_in()` and `sing_up` functions in `Input_checker.py` file.
 * Upload/download (experiment data)
