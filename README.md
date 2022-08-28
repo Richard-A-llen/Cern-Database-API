@@ -13,7 +13,7 @@ We have used Flask to build a web application microservice.
 * User menu (command line input)
 * Sign up/login
   
-Sign up and login steps takes apropriate inpurs to create a user account 
+Sign up and login steps take apropriate inpurs to create a user account 
 or to allow for access to the database respectively. These functionalities
 are implemented by `log_in()` and `sing_up` functions in `Input_checker.py` file.
 * Upload/download (experiment data)
@@ -29,7 +29,6 @@ algorithm (`hashing()` in `Authentication_checker.py`) on the input-password and
 compares it with a hashed password stored in the database (search takes place 
 based on username as a primary key). If these two passwords are the same, then 
 logging-in is successful and `log_in()` returns a user object.
-done.
 
 * Hashing  
   
@@ -40,6 +39,9 @@ in the database.
 
 * Data encryption
 * Parametrised Queries
+
+Parametrised queries seperate the data from the SQL statement to be compliled. As the query is translated placeholders `("?")`  will be used instead of parameters (column value) and the parameter value would be supplied at the time of execution. For example ; `(name, format, subject) VALUES(?, ?, ?)`. This helps prevent SQL injection attacks where actors inject malicious code to try change the intention of the query.
+
 * Authorisation
 ## 4. Installation
 ### Dependencies 
@@ -52,6 +54,29 @@ Description of how to run the file
 Display a directory diagram
 ## 6. Project files
 list of file and brief Description of functionality
+* `Encryptor.py`
+* `client.py`
+* `database_cern.py`
+* `flask_cert.pem`
+* `flask_private-key.pem`
+* `plaeholder.txt`
+* `requirements.txt`
+* `server.py`
+* `session.py`
+* `Authentication.py`
+* `Authentication_checker.py`
+* `Classes.py`
+* `Input_checker.py`
+* `database.py`
+* `database_file.db`
+* `database_managment.py`
+* `main.py`
+* `AuthorisationDataBase.py`
+* `authorisation.py`
+* `crud.py`
+* `crud_server.py`
+* `db_and_table.py`
+
 ## 7. Tests
 Mention all the different tests performed with code examples
 ## 8. How to Use
@@ -59,3 +84,6 @@ Simple step by step guide to how to use the app. How to sign up , login in , upl
 ## 9. References
 Great Learning Team (2021). README File – Everything you Need to Know [online] Available from:
 https://www.mygreatlearning.com/blog/readme-file/ [accessed 28th August 2022]
+
+Pynative.com (2021). Python MySQL Execute Parameterized Query using Prepared Statement. [online] Available from:
+https://pynative.com/python-mysql-execute-parameterized-query-using-prepared-statement/
