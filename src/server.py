@@ -62,7 +62,7 @@ def dispatcher(request_type):
                 return (result, 200)
             return ("request successful", 200)
         except Exception as err:
-            return (err, 400)
+            return (str(err), 400)
     return ("Invalid request", 400)
 
 
