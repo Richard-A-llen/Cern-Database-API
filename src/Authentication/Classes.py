@@ -9,7 +9,7 @@ class User:
         self.__email = __email
         self.user_name = __user_name
         self.__password = __password
-        self.__admin = admin
+        self.admin = admin
 
     def __str__(self):
         """It represents a object as a string if the string is printed."""
