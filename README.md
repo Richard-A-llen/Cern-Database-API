@@ -39,6 +39,9 @@ in the database.
 
 * Data encryption
 * Parametrised Queries
+
+Parametrised queries seperate the data from the SQL statement to be compliled. As the query is translated placeholders `("?")`  will be used instead of parameters (column value) and the parameter value would be supplied at the time of execution. For example ; `(name, format, subject) VALUES(?, ?, ?)`. This helps prevent SQL injection attacks where actors inject malicious code to try change the intention of the query.
+
 * Authorisation
 ## 4. Installation
 ### Dependencies 
@@ -58,3 +61,6 @@ Simple step by step guide to how to use the app. How to sign up , login in , upl
 ## 9. References
 Great Learning Team (2021). README File – Everything you Need to Know [online] Available from:
 https://www.mygreatlearning.com/blog/readme-file/ [accessed 28th August 2022]
+
+Pynative.com (2021). Python MySQL Execute Parameterized Query using Prepared Statement. [online] Available from:
+https://pynative.com/python-mysql-execute-parameterized-query-using-prepared-statement/
