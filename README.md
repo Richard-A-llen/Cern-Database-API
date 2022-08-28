@@ -54,6 +54,29 @@ Description of how to run the file
 Display a directory diagram
 ## 6. Project files
 list of file and brief Description of functionality
+* `Encryptor.py`
+* `client.py`
+* `database_cern.py`
+* `flask_cert.pem`
+* `flask_private-key.pem`
+* `plaeholder.txt`
+* `requirements.txt`
+* `server.py`
+* `session.py`
+* `Authentication.py`
+* `Authentication_checker.py`
+* `Classes.py`
+* `Input_checker.py`
+* `database.py`
+* `database_file.db`
+* `database_managment.py`
+* `main.py`
+* `AuthorisationDataBase.py`
+* `authorisation.py`
+* `crud.py`
+* `crud_server.py`
+* `db_and_table.py`
+
 ## 7. Tests
 Mention all the different tests performed with code examples
 ## 8. How to Use
