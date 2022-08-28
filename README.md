@@ -82,8 +82,8 @@ list of file and brief Description of functionality
 * `db_and_table.py`
 
 ## 7. Tests
-* Unittest
-* Insomnia 
+Unittest has been used for testing.
+ 
 ## 8. How to Use
 Simple step by step guide to how to use the app. How to sign up , login in , upload a file encryption
 ## 9. References
