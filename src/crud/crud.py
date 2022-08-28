@@ -46,3 +46,12 @@ def get_files():
     cursor.execute(statement)
     # returns all the rows of the query (statement)
     return cursor.fetchall()  
+
+
+# Calling some functions
+insert_file("DarkMatter", ".pdf", "Physics")
+insert_file("Magnets", ".jpg", "Engineering")
+insert_file("Web", ".docx", "Computing")
+get_files()
+get_file_by_id(2)
+
