@@ -71,6 +71,7 @@ list of file and brief Description of functionality
 * `database_file.db`
 * `database_managment.py`
 * `main.py`
+* `main_user.py`
 * `AuthorisationDataBase.py`
 * `authorisation.py`
 * `crud.py`
