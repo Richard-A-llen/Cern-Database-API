@@ -57,7 +57,7 @@ The programme requirements :
 * Pycryptodome
 * readerwriterlock
 ### How to run
-'python server.py' will run startup a flask service, and listen on 8080 port. The server enables https with self-signed ssl certificatoin, and it was binding on the 127.0.0.1. If you use a browser to send the request, it could indicate a safety risk. But you can use client.py to send command to the server side. Execute `client.py` to demostrate download (change variable for file_name). To demostrate upload for security reasons file just supports PDF, TXT and ZIP.
+Run `'python server.py'` for a startup flask service listening to 8080 port. The server enables https with self-signed ssl certificatoin,  binding on the 127.0.0.1. If you use a browser to send the request, it could indicate a safety risk - but you can use client.py to send command to the server side. Execute ``client.py`` to demostrate download (change variable for file_name). To demostrate upload for security reasons file upload just supports PDF, TXT and ZIP.
 ## 5. Project files
 List of files and brief description of functionality
 * `Encryptor.py` defines `Encryptor` class, minimise brute force attacks 
