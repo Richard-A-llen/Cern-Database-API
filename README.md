@@ -80,6 +80,7 @@ list of file and brief Description of functionality
 * `crud.py`
 * `crud_server.py`
 * `db_and_table.py`
+* `test_crud_insert.py`
 
 ## 7. Tests
 Unittest has been used for testing.
