@@ -63,13 +63,13 @@ Display a directory diagram
 list of file and brief Description of functionality
 * `Encryptor.py` defines `Encryptor` class, minimise brute force attacks 
 * `client.py`
-* `database_cern.py`
-* `flask_cert.pem`
-* `flask_private-key.pem`
+* `database_cern.py` defines initial connection to database
+* `flask_cert.pem` CERTIFICATE
+* `flask_private-key.pem` Private key
 * `plaeholder.txt`
 * `requirements.txt`
-* `server.py`
-* `session.py`
+* `server.py`module to forward valid requests to one defined handler
+* `session.py` module focusing on session management
 * `Authentication.py` creates new user and/or new user object
 * `Authentication_checker.py`contains password hashing function, user authentication checker fuction and password strength function
 * `Classes.py` defines User class, Administrator class and Experiment class a created or loaded experiment
