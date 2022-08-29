@@ -56,7 +56,7 @@ The programme requirements :
 * SQLite
 * Pycryptodome
 ### How to run
-Execute `client.py` to demostrate download (change variable for file_name). To demostrate upload for security reasons just supports PDF, TXT and DB.
+Execute `client.py` to demostrate download (change variable for file_name). To demostrate upload for security reasons file just supports PDF, TXT and DB.
 ## 5. Project files
 List of files and brief description of functionality
 * `Encryptor.py` defines `Encryptor` class, minimise brute force attacks 
