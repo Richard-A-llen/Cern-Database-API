@@ -89,9 +89,7 @@ List of files and brief description of functionality
 ## 6. Tests
 Unittest has been used for testing.
  
-## 7. How to Use
-Simple step by step guide to how to use the app. How to sign up , login in , upload a file encryption
-## 8. References
+## 7. References
 Great Learning Team (2021). README File – Everything you Need to Know [online] Available from:
 https://www.mygreatlearning.com/blog/readme-file/ [accessed 28th August 2022]
 
