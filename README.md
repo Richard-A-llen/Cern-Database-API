@@ -79,13 +79,14 @@ list of file and brief Description of functionality
 * `database_file.db`
 * `database_managment.py` controls SQL fuctions for database management
 * `main.py` module includes function to start the script linked to the the authentication module via (login and sign up) and prints the user menu
-* `main_user.py`
+* `main_user.py` a part of the main.py module, helps create user menu
 * `AuthorisationDataBase.py` creates database to store authorisation data
 * `authorisation.py` defines authorisation class 
-* `crud.py`
-* `crud_server.py`
-* `db_and_table.py`
-* `test_crud_insert.py`
+* `unittests.py` Unittests for Authentication part of the software
+* `crud.py` executes crud commands on database, utilises parametrised queries
+* `crud_server.py` utilises JSON for communication to and from server
+* `db_and_table.py` connection to `cern.db` and creation of userfiles table using SQLite3 
+* `test_crud_insert.py` CRUD unit test
 
 ## 7. Tests
 Unittest has been used for testing.
