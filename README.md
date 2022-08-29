@@ -75,10 +75,10 @@ list of file and brief Description of functionality
 * `Classes.py` defines User class, Administrator class and Experiment class a created or loaded experiment
 * `Input_checker.py` includes `log_in` fuction which checks username and password, and  `sing_up` checker function that examines inputs provided by the
     user before the sign-up details are passed through and a new user is added to the database.
-* `database.py`
+* `database.py` creates a database connection to a SQLite database
 * `database_file.db`
-* `database_managment.py`
-* `main.py`
+* `database_managment.py` controls SQL fuctions for database management
+* `main.py` module includes function to start the script linked to the the authentication module via (login and sign up) and prints the user menu
 * `main_user.py`
 * `AuthorisationDataBase.py` creates database to store authorisation data
 * `authorisation.py` defines authorisation class 
