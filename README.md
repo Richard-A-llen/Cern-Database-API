@@ -72,8 +72,9 @@ list of file and brief Description of functionality
 * `session.py`
 * `Authentication.py` creates new user and/or new user object
 * `Authentication_checker.py`contains password hashing function, user authentication checker fuction and password strength function
-* `Classes.py`
-* `Input_checker.py`
+* `Classes.py` defines User class, Administrator class and Experiment class a created or loaded experiment
+* `Input_checker.py` includes `log_in` fuction which checks username and password, and  `sing_up` checker function that examines inputs provided by the
+    user before the sign-up details are passed through and a new user is added to the database.
 * `database.py`
 * `database_file.db`
 * `database_managment.py`
