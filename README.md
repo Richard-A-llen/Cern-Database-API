@@ -94,7 +94,7 @@ Unittest has been used for testing.
 | 1 | Print object salt | newVar = obj.salt/print(newVar) | first line of appendix1 | first line of appendix1 | 1 |
 | 2 | Print derived key | print(obj.PBKDF2Key) | second line of appendix1 | second line of appendix1 | 1 |
 | 3 | print ciphered data | print(obj.ciphered_data) | third line of appendix1 | third line of appendix1 | 1 |
-| 4 | Unittests ofr Authentication | Built-in inputs | Run 24 tests OK | Run 24 tests OK | 2 |
+| 4 | Unittests of Authentication | Built-in inputs | Run 24 tests OK | Run 24 tests OK | 2 |
 | 5 | empty | empty | empty | empty | empty |
 | 6 | empty | empty | empty | empty | empty |
  
