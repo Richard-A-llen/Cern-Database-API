@@ -49,12 +49,12 @@ def admin(user_object):
     elif inp == '2':
         print("Provide a username of an account to be deleted")
         inp_delete = input()
-        admin(user)
         try:
             dbm.sql_delete_user(inp_delete)
             print(f"A user {inp_delete} has been removed.")
         except ValueError:
             print("Wrong username.")
+        admin(user)
     elif inp == '3':
         print("Provide a username of an account to be upgraded")
         inp_upgrade = input()
