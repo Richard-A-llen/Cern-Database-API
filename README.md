@@ -41,7 +41,7 @@ in the database.
 
 * Data encryption
 
-Data is sent to the Encryptor class that encrypts the data with a salted password that generates a key in PBKDF2, as CERN requires FIPS-140 compliance. Iteration count is 7000100, but can be altered. The slowless of the code is to minimise the attack surface of brute force and dictionary attacks. The encryption standard is AES with mode CBC that is a block cipher, that both ciphers the chosen data and encrypts it. The data is readable with the same derived key. 
+Data is sent to the Encryptor class that encrypts the data with a salted password that generates a key in PBKDF2, as CERN requires FIPS-140 compliance. OWASP recomends internal hashing, for example SHA-256. Iteration count is 7000100, but can be altered. The slowless of the code is to minimise the attack surface of brute force and dictionary attacks. The encryption standard is AES with mode CBC that is a block cipher, that both ciphers the chosen data and encrypts it. The data is readable with the same derived key. 
 
 * Parametrised Queries
 
