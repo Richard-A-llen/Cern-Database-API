@@ -2,7 +2,7 @@ import sqlite3
 
 def get_database():
     # connects to the database
-    connection = sqlite3.connect("cern.py")
+    connection = sqlite3.connect("cern.db")
     return connection
 
 # The name of the table is 'userfiles'
