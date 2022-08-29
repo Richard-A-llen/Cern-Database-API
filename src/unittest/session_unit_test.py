@@ -15,19 +15,19 @@ class TestSessionManager(unittest.TestCase):
     def test_add_session(self):
         cls = self.__class__
         user_mock = Mock()
-        user_mock.name = "fake user A"
-        user_mock.is_admin = False
+        user_mock.user_name = "fake user A"
+        user_mock.admin = 0
         session = cls._session_manager.add(user_mock)
         self.assertNotEqual(session, None)
         user_info = cls._session_manager.get(session)
-        self.assertEqual(user_info.name, user_mock.name)
+        self.assertEqual(user_info.name, user_mock.user_name)
         time.sleep(2)
         timeout_user_info = cls._session_manager.get(session)
         self.assertEqual(timeout_user_info, None)
         session_2 = cls._session_manager.add(user_mock)
         self.assertEqual(session, session_2)
         user_info_2 = cls._session_manager.get(session_2)
-        self.assertEqual(user_info_2.name, user_mock.name)
+        self.assertEqual(user_info_2.name, user_mock.user_name)
         fake_session = "asdfqwervxcsvae6f4qw65er486q7wer"
         self.assertEqual(cls._session_manager.get(fake_session), None)
 
