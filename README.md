@@ -61,7 +61,7 @@ Description of how to run the file
 Display a directory diagram
 ## 6. Project files
 list of file and brief Description of functionality
-* `Encryptor.py`
+* `Encryptor.py` defines `Encryptor` class, minimise brute force attacks 
 * `client.py`
 * `database_cern.py`
 * `flask_cert.pem`
