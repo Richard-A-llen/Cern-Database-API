@@ -18,7 +18,7 @@ or to allow for access to the database respectively. These functionalities
 are implemented by `log_in()` and `sing_up` functions in `Input_checker.py` file.
 * Upload/download (experiment data)
 
-Users can upload/download their files. The whole process is done using `user_download()`, `user_upload()`, `user_delete_file()` and `user_list_files()` functions.Every function is related to http methods located in `crud_server.py` file.
+Users can upload/download their files. The whole process is done using `user_download()`, `user_upload()`, `user_delete_file()` and `user_list_files()` functions.
 ### Security Features
 Selected to demostrate SSD and based on the OWASP top ten security vulnerabilities this project incoporates the following security features.
 * Authentication
