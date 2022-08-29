@@ -57,9 +57,7 @@ The programme requirements :
 * Pycryptodome
 ### How to run
 Description of how to run the file
-## 5. Structure
-Display a directory diagram
-## 6. Project files
+## 5. Project files
 List of files and brief description of functionality
 * `Encryptor.py` defines `Encryptor` class, minimise brute force attacks 
 * `client.py`
@@ -88,12 +86,12 @@ List of files and brief description of functionality
 * `db_and_table.py` connection to `cern.db` and creation of userfiles table using SQLite3 
 * `test_crud_insert.py` CRUD unit test
 
-## 7. Tests
+## 6. Tests
 Unittest has been used for testing.
  
-## 8. How to Use
+## 7. How to Use
 Simple step by step guide to how to use the app. How to sign up , login in , upload a file encryption
-## 9. References
+## 8. References
 Great Learning Team (2021). README File – Everything you Need to Know [online] Available from:
 https://www.mygreatlearning.com/blog/readme-file/ [accessed 28th August 2022]
 
