@@ -107,6 +107,7 @@ https://pynative.com/python-mysql-execute-parameterized-query-using-prepared-sta
 
 ## 8. Appendix
 Screen reference 1
+
 ![Screenshot 2022-08-29 at 21 09 27](https://user-images.githubusercontent.com/67603121/187289115-41281ee2-d02f-4c26-91d6-f41995e13ba8.png)
 
 
