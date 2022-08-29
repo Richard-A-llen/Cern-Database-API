@@ -95,8 +95,7 @@ Unittest has been used for testing.
 | 2 | Print derived key | print(obj.PBKDF2Key) | second line of appendix1 | second line of appendix1 | 1 |
 | 3 | print ciphered data | print(obj.ciphered_data) | third line of appendix1 | third line of appendix1 | 1 |
 | 4 | Unittests for Authentication | Built-in inputs | Run 24 tests OK | Run 24 tests OK | 2 |
-| 5 | empty | empty | empty | empty | empty |
-| 6 | empty | empty | empty | empty | empty |
+
  
 ## 7. References
 Great Learning Team (2021). README File – Everything you Need to Know [online] Available from:
@@ -116,6 +115,4 @@ Screen reference 2
 
 
 
-Screen reference 2
 
-Screen reference 3
