@@ -53,7 +53,7 @@ Parametrised queries seperate the data from the SQL statement to be compliled. A
 The programme requirements :
 * Python 3.10
 * Flask 2.2.2 
-* SQLite
+* SQLite3
 * Pycryptodome
 * readerwriterlock
 ### How to run
