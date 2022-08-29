@@ -91,9 +91,12 @@ List of files and brief description of functionality
 Unittest has been used for testing.
 | Test number | Function | Input/condition | Expected result | Actual result | Screen reference |
 | --- | ----------- | --- | ----------- | --- | ----------- |
-| 1 | empty | empty | empty | empty | empty |
-| 2 | empty | empty | empty | empty | empty |
-| 3 | empty | empty | empty | empty | empty |
+| 1 | Print object salt | newVar = obj.salt/print(newVar) | first line of appendix1 | first line of appendix1 | 1 |
+| 2 | Print derived key | print(obj.PBKDF2Key) | second line of appendix1 | second line of appendix1 | 1 |
+| 3 | print ciphered data | print(obj.ciphered_data) | third line of appendix1 | third line of appendix1 | 1 |
+| 4 | empty | empty | empty | empty | empty |
+| 5 | empty | empty | empty | empty | empty |
+| 6 | empty | empty | empty | empty | empty |
  
 ## 7. References
 Great Learning Team (2021). README File – Everything you Need to Know [online] Available from:
@@ -101,3 +104,13 @@ https://www.mygreatlearning.com/blog/readme-file/ [accessed 28th August 2022]
 
 Pynative.com (2021). Python MySQL Execute Parameterized Query using Prepared Statement. [online] Available from:
 https://pynative.com/python-mysql-execute-parameterized-query-using-prepared-statement/
+
+## 8. Appendix
+Screen reference 1
+![Screenshot 2022-08-29 at 21 09 27](https://user-images.githubusercontent.com/67603121/187289115-41281ee2-d02f-4c26-91d6-f41995e13ba8.png)
+
+
+
+Screen reference 2
+
+Screen reference 3
