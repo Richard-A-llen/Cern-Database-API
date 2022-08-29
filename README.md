@@ -40,6 +40,8 @@ length into a sequence 256 bits and all secured hashed passwords will be stored
 in the database.
 
 * Data encryption
+Data is sent to the Encryptor class that encrypts the data with a salted password that generates a key in PBKDF2, as CERN requires FIPS-140 compliance. Iteration count is 7000100, but can be altered. The slowless of the code is to minimise the attack surface of brute force and dictionary attacks. The encryption standard is AES with mode CBC that is a block cipher, that both ciphers the chosen data and encrypts it. The data is readable with the same derived key. 
+
 * Parametrised Queries
 
 Parametrised queries seperate the data from the SQL statement to be compliled. As the query is translated placeholders `("?")`  will be used instead of parameters (column value) and the parameter value would be supplied at the time of execution. For example ; `(name, format, subject) VALUES(?, ?, ?)`. This helps prevent SQL injection attacks where actors inject malicious code to try change the intention of the query.
@@ -51,6 +53,7 @@ The programme requirements :
 * Python 3.10
 * Flask 2.2.2 
 * SQLite
+* Pycryptodome
 ### How to run
 Description of how to run the file
 ## 5. Structure
