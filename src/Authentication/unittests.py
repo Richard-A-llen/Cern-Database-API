@@ -42,7 +42,7 @@ class TestInputChecker(unittest.TestCase):
         self.assertRaises(RuntimeError, Ic.log_in, "amin",
                           "Thisisanadminpassword1!")
 
-    def test_sing_up(self):
+    def test_sign_up(self):
         """
         The test adds a user to the database and checks it if it has been
         added successfully. Afterwards the user is removed to make it work

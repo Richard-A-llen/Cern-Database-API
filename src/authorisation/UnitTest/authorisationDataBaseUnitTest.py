@@ -1,30 +1,23 @@
-import sys, os, json
+import sys
+import os
+import json
 import unittest
 from unittest.mock import Mock
 
-sys.path.append(os.path.dirname(__file__) + r"/../")
-from authorisation import AuthorisationDataBase
+sys.path.append(os.path.dirname(__file__)+ r"/../")
+from AuthorisationDataBase import AuthorisationDataBase  # NOQA
 
 
 class TestAuthorisationDataBase(unittest.TestCase):
-    
     def _init_data(self):
         config_str = r"""
             {
-                "/userA/folder/test.pdf":
-                {
-                    "reading": ["userA", "userB", "userZ"],
-                    "writing": ["userA", "userB"],
-                    "deleting": ["userA"],
-                    "downloading": ["userA", "userB", "userX"]
-                },
-
-                "/userA/folder":
+                "FileRepository":
                 {
                     "uploading": ["userA"]
                 },
 
-                "/userB/folder/fileOfB.txt":
+                "testA.pdf":
                 {
                     "reading": ["userA", "userB", "userZ"],
                     "writing": ["userA", "userB"],
@@ -32,33 +25,35 @@ class TestAuthorisationDataBase(unittest.TestCase):
                     "downloading": ["userA", "userB", "userX"]
                 },
 
-                "/userB/folder/":
+                "testB.txt":
                 {
-                    "uploading": ["userB"]
+                    "reading": ["userA", "userB", "userZ"],
+                    "writing": ["userA", "userB"],
+                    "deleting": ["userA"],
+                    "downloading": ["userA", "userB", "userX"]
                 }
             }
         """
         self._authorisationDataBase = AuthorisationDataBase(json.loads(config_str))
-        
 
     def test_query(self):
         self._init_data()
-        user_list = self._authorisationDataBase.get_reading(r"/userA/folder/test.pdf")
+        user_list = self._authorisationDataBase.get_reading(r"testA.pdf")
         self.assertEqual(user_list, ["userA", "userB", "userZ"])
-        user_list = self._authorisationDataBase.get_writing(r"/userA/folder/test.pdf")
+        user_list = self._authorisationDataBase.get_writing(r"testA.pdf")
         self.assertEqual(user_list, ["userA", "userB"])
-        user_list = self._authorisationDataBase.get_deleting(r"/userA/folder/test.pdf")
+        user_list = self._authorisationDataBase.get_deleting(r"testA.pdf")
         self.assertEqual(user_list, ["userA"])
-        user_list = self._authorisationDataBase.get_uploading(r"/userA/folder/test.pdf")
+        user_list = self._authorisationDataBase.get_uploading(r"testA.pdf")
         self.assertEqual(user_list, None)
-        user_list = self._authorisationDataBase.get_uploading(r"/userA/folder")
+        user_list = self._authorisationDataBase.get_uploading(r"FileRepository")
         self.assertEqual(user_list, ["userA"])
-        user_list = self._authorisationDataBase.get_downloading(r"/userA/folder/test.pdf")
+        user_list = self._authorisationDataBase.get_downloading(r"testA.pdf")
         self.assertEqual(user_list, ["userA", "userB", "userX"])
-    
+
     def test_updating(self):
         self._init_data()
-        file_name = r"/userB/folder/fileOfB.txt"
+        file_name = r"testB.txt"
         # update_reading
         self._authorisationDataBase.update_reading(file_name, ["userX", "userY"], True)
         user_list = self._authorisationDataBase.get_reading(file_name)
@@ -116,20 +111,19 @@ class TestAuthorisationDataBase(unittest.TestCase):
         self.assertEqual(user_list, ["userA", "userB", "userZ"])
 
         # update_uploading
-        folder_name = r"/userB/folder/"
+        folder_name = r"FileRepository"
         self._authorisationDataBase.update_uploading(folder_name, ["userX", "userY"], True)
         user_list = self._authorisationDataBase.get_uploading(folder_name)
-        self.assertEqual(user_list, ["userB", "userX", "userY"])
+        self.assertEqual(user_list, ["userA", "userX", "userY"])
         self._authorisationDataBase.update_uploading(folder_name, ["userZ"], True)
         user_list = self._authorisationDataBase.get_uploading(folder_name)
-        self.assertEqual(user_list, ["userB", "userX", "userY", "userZ"])
+        self.assertEqual(user_list, ["userA", "userX", "userY", "userZ"])
         self._authorisationDataBase.update_uploading(folder_name, ["userX", "userY"], False)
         user_list = self._authorisationDataBase.get_uploading(folder_name)
-        self.assertEqual(user_list, ["userB", "userZ"])
+        self.assertEqual(user_list, ["userA", "userZ"])
         self._authorisationDataBase.update_uploading(folder_name, ["NotExist"], False)
         user_list = self._authorisationDataBase.get_uploading(folder_name)
-        self.assertEqual(user_list, ["userB", "userZ"])
-        
+        self.assertEqual(user_list, ["userA", "userZ"])
 
 
 if __name__ == "__main__":

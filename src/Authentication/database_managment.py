@@ -1,10 +1,12 @@
 import sqlite3
+import os
 
+_database_name = os.path.dirname(__file__) + r'/database_file.db'
 
 def create_table():
     """This function creates the table in the database if it does not exist."""
 
-    conn = sqlite3.connect('database_file.db')
+    conn = sqlite3.connect(_database_name)
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS users (name varchar(255), email 
     varchar(255), username varchar(255), password varchar(255), admin int)''')
@@ -15,7 +17,7 @@ def create_table():
 def sql_add_user(details: list):
     """This function adds a user to the database."""
 
-    conn = sqlite3.connect('database_file.db')
+    conn = sqlite3.connect(_database_name)
     conn.set_trace_callback(print)
     c = conn.cursor()
 
@@ -37,11 +39,10 @@ def sql_user_exist(username):
     It returns int 1 if it does.
     It returns int 0 if it does not.
     """
-
-    conn = sqlite3.connect('database_file.db')
+    
+    conn = sqlite3.connect(os.path.dirname(__file__) + r'/database_file.db')
     c = conn.cursor()
-    result = c.execute(f'''SELECT EXISTS(SELECT 1 FROM users WHERE username = 
-    "{username}");''')
+    result = c.execute(f'''SELECT EXISTS(SELECT 1 FROM users WHERE username = "{username}");''')
     result_to_return = result.fetchone()
     conn.commit()
     conn.close()
@@ -52,7 +53,7 @@ def sql_password_correct(username):
     """This function checks if password that has been provided by a user is
     valid, i.e. its hashed value is equal to those stored in the database."""
 
-    conn = sqlite3.connect('database_file.db')
+    conn = sqlite3.connect(_database_name)
     c = conn.cursor()
     result = c.execute(f"""SELECT password FROM users WHERE username = 
     '{username}';""")
@@ -67,7 +68,7 @@ def sql_print_all():
     and returns a list of all records."""
     user_list = []
 
-    conn = sqlite3.connect('database_file.db')
+    conn = sqlite3.connect(_database_name)
     c = conn.cursor()
     c.execute("""SELECT * FROM users;""")
     rows = c.fetchall()
@@ -83,7 +84,7 @@ def sql_change_user_status(selected_user):
     """This function upgrade a chosen user to be an administrator.
     This function can be use by an existing administrator only."""
 
-    conn = sqlite3.connect('database_file.db')
+    conn = sqlite3.connect(_database_name)
     c = conn.cursor()
     c.execute(f"""UPDATE users SET admin = 1 WHERE username =
      '{selected_user}';""")
@@ -95,7 +96,7 @@ def sql_delete_user(selected_user):
     """This function deletes a chosen user from the database.
     This function can be use by an existing administrator only."""
 
-    conn = sqlite3.connect('database_file.db')
+    conn = sqlite3.connect(_database_name)
     c = conn.cursor()
     c.execute(f"""DELETE FROM users WHERE username = '{selected_user}'""")
     conn.commit()

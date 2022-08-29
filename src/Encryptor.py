@@ -42,6 +42,7 @@ class Encryptor:
         self.cipher = AES.new(self.PBKDF2Key, AES.MODE_CBC)
         # the ciphered data is encrypted
         self.ciphered_data = self.cipher.encrypt(pad(self.textToEncryptInBytes, AES.block_size))
+        return self.ciphered_data
 
     def writeCipheredDataToFile(self):
         # writing encrypted data to .bin file

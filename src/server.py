@@ -6,11 +6,17 @@ the request will be passed to login handler with parameters {name: test, passwor
 """
 
 import os
+import sys
 from enum import Enum
+
 import flask
 from flask import Flask, send_file
 from flask import request as FlaskRequest
-from werkzeug.datastructures import FileStorage
+# from werkzeug.datastructures import FileStorage
+
+sys.path.append(os.path.dirname(__file__) + r'/Authentication')
+from Input_checker import log_in_with_http, sign_up
+from crud import crud
 
 
 server = Flask(__name__)
@@ -21,9 +27,9 @@ def dump_func(*args, **kwargs):
     print(f"kwargs: {kwargs}")
     return True
 
-
-def download_test(*args, **kwargs):
-    return send_file(r"D:\\Programs\\eMule\\Incoming\\3.33.srt", as_attachment=True)
+def upload_wrap(flask_request):
+    file_data = flask_request.files.get('file')
+    return crud.user_upload(file_data=file_data, **flask_request.args)
 
 
 class RequestType(Enum):
@@ -40,23 +46,26 @@ class RequestType(Enum):
 
 # bind request to a specific handler
 request_handlers = {
-    RequestType.SIGNUP.value: dump_func,
-    RequestType.LOGIN.value: dump_func,
-    RequestType.DOWNLOAD.value: download_test,
-    RequestType.UPLOAD.value: dump_func,
-    RequestType.DELETE.value: dump_func,
-    RequestType.CREATE.value: dump_func,
-    RequestType.UPDATE.value: dump_func,
+    RequestType.SIGNUP.value: sign_up,
+    RequestType.LOGIN.value: log_in_with_http,
+    RequestType.DOWNLOAD.value: crud.user_download,
+    RequestType.UPLOAD.value: upload_wrap,
+    # RequestType.DELETE.value: dump_func,
+    # RequestType.CREATE.value: dump_func,
+    # RequestType.UPDATE.value: dump_func,
 }
 
 
-@server.route('/request/<request_type>')
+@server.route('/request/<request_type>', methods=['POST', 'GET', 'PUT', 'DELETE'])
 def dispatcher(request_type):
     """The function will call a defined function based on request type"""
 
     if (handler := request_handlers.get(request_type)):
         try:
-            result = handler(**FlaskRequest.args)
+            if request_type == RequestType.UPLOAD.value:
+                result = handler(FlaskRequest)
+            else:
+                result = handler(**FlaskRequest.args)
             if isinstance(result, (flask.wrappers.Response, str)):
                 # called function can return its successful info to client
                 return (result, 200)

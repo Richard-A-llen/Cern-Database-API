@@ -1,6 +1,7 @@
 import Classes as Cls
 import database_managment as DB
 import sqlite3
+import os
 
 
 def add_user(details: list):
@@ -16,7 +17,7 @@ def create_user_object(user_name):
     If it is 0 (int), the function creates User object.
     """
 
-    conn = sqlite3.connect('database_file.db')
+    conn = sqlite3.connect(os.path.dirname(__file__) + r'/database_file.db')
     c = conn.cursor()
     c.execute("""SELECT * FROM users;""")
     rows = c.fetchall()

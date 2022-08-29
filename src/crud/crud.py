@@ -1,57 +1,69 @@
-from db_and_table import get_database
-# using 'db_and_table.py' to access 'get_database' function
+import pathlib
+import os
+import sys
 
-def insert_file(name, format, subject):
-    # calling get_database() method from 'db_and_table.py'
-    database = get_database()  
-    cursor = database.cursor()
-    statement = "INSERT INTO userfiles(name, format, subject) VALUES(?, ?, ?)"    
-    cursor.execute(statement, [name, format, subject])
-    # makes permanent the changes
-    database.commit()  
-    return True
+from flask import send_file
+from readerwriterlock import rwlock
 
-def update_file(id, name, format, subject):    
-    database = get_database()    
-    cursor = database.cursor()
-    statement = "UPDATE userfiles SET name=?, format=?, subject=? WHERE id=?"
-    cursor.execute(statement, [name, format, subject, id])
-    database.commit()
-    return True
+sys.path.append(os.path.dirname(__file__) + r"/../authorisation")
+from authorisation import authorisation_singleton, AuthorisationType  # NOQA
 
-def delete_file(id):
-    "Deletes a file by id"
-    database = get_database() 
-    cursor = database.cursor()
-    statement = "DELETE FROM userfiles WHERE id=?"
-    # executes the statement and fetch the records from the database. 
-    cursor.execute(statement, [id]) 
-    database.commit() 
-    return True    
-
-def get_file_by_id(id):     
-    database = get_database()
-    cursor = database.cursor()
-    statement = "SELECT id, name, format, subject FROM userfiles WHERE id=?"
-    # executes the query based on id and fetch the records from the database.
-    cursor.execute(statement, [id]) 
-    # returns one row of the query (statement)
-    return cursor.fetchone() 
-
-def get_files(): 
-    "Returns all existing files"
-    database = get_database()
-    cursor = database.cursor()
-    statement = "SELECT id, name, format, subject FROM userfiles" 
-    cursor.execute(statement)
-    # returns all the rows of the query (statement)
-    return cursor.fetchall()  
+from common_cfg import file_repository
 
 
-# Calling some functions
-insert_file("DarkMatter", ".pdf", "Physics")
-insert_file("Magnets", ".jpg", "Engineering")
-insert_file("Web", ".docx", "Computing")
-get_files()
-get_file_by_id(2)
+_crud_lock = rwlock.RWLockFairD()
 
+
+def user_download(session=None, file_name=None):
+    file_path = file_repository + f"/{file_name}"
+    if not authorisation_singleton.has_permission(session, AuthorisationType.DOWNLOADING, file=file_path):
+        # file permission check failed
+        raise Exception("no permission to download file")
+
+    with _crud_lock.gen_rlock():
+        return send_file(file_path, as_attachment=True)
+
+
+def user_upload(file_data=None, session=None, file_name=None):
+    if not file_data:
+        raise Exception("Empty file to upload")
+
+    if not authorisation_singleton.has_permission(session, AuthorisationType.UPLOADING, file=file_repository):
+        # folder permission check failed
+        raise Exception("no permission to upload file")
+
+    # check file_name size to avoid too long
+    if len(file_name) > 100:
+        raise Exception("The file name can't exceed 100 characters")
+
+    # sanitize file's name
+    good_name = ""
+    for c in file_name:
+        if c in "._-()" or "A" <= c <= "Z" or "a" <= c <= "z" or "0" <= c <= "9":
+            # remove danger character
+            good_name += c
+    valid_suffix = [".pdf", ".txt", ".zip", ".jpg"]
+    if "." not in good_name or pathlib.Path(good_name).suffix.lower() in valid_suffix:
+        save_file = file_repository + f"/{good_name}"
+        with _crud_lock.gen_wlock():
+            file_data.save(save_file)
+        return
+    raise Exception("Invalid file type")
+
+
+def user_list_files(session=None):
+    all_files = os.listdir(file_repository)
+    user_list_files = []
+    for file in all_files:
+        if authorisation_singleton.has_permission(session, AuthorisationType.READING, file=file):
+            user_list_files.append(file)
+    return f"files: {str(user_list_files)}"
+
+
+def user_delete_file(session=None, file_name=None):
+    if authorisation_singleton.has_permission(session, AuthorisationType.DELETE, file=file_name):
+        file_path = file_repository + f"/{file_name}"
+        with _crud_lock.gen_wlock():
+            os.remove(file_path)
+            return
+    raise Exception("Can't delete file")
