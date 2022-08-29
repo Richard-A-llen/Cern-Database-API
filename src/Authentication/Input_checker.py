@@ -22,7 +22,6 @@ def log_in(inp_username, inp_password):
         if user_name_verification != 1:
             print(' The username does not exist. Try again.')
             raise RuntimeError
-            # inp = username_fn()
 
         return inp
 
@@ -43,8 +42,11 @@ def log_in(inp_username, inp_password):
 
 
 def sing_up(inp_name, inp_email, inp_username, inp_password):
-    """This is a sign-up checker function that examines inputs provided by the
-        user before the sign-up details are passed through."""
+    """
+    This is a sign-up checker function that examines inputs provided by the
+    user before the sign-up details are passed through and a new user
+    is added to the database.
+    """
 
     def name_fn(inp):
         """The function checks if name of the user is provided correctly."""
@@ -53,7 +55,6 @@ def sing_up(inp_name, inp_email, inp_username, inp_password):
             print(" Provide your first name and surname separated by space! "
                   "Try again.")
             raise RuntimeError
-            # inp = name_fn()
         return inp
 
     def email_fn(inp):
@@ -63,7 +64,6 @@ def sing_up(inp_name, inp_email, inp_username, inp_password):
         if not inp.endswith("@cern.ch"):
             print(" Wrong e-mail! Try again.")
             raise RuntimeError
-            # inp = email_fn()
         return inp
 
     def username_fn(inp):
@@ -107,10 +107,6 @@ def sing_up(inp_name, inp_email, inp_username, inp_password):
     password = password_fn(inp_password)
     details = [username, password, name, email, 0]
     add_user(details)
-
-
-
-
 
 
 

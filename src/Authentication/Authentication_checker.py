@@ -32,7 +32,7 @@ def password_correct(user_name, password):
 
 def password_strength(password):
     """This function checks if password is strong enough."""
-    # write more!!!
+
     checking_list = [False] * 5
     number = 10
     # long enough check_list[0] is True

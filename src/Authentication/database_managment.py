@@ -101,10 +101,5 @@ def sql_delete_user(selected_user):
     conn.commit()
     conn.close()
 
-sql_print_all()
+# sql_print_all()
 # sql_delete_user('johnsmith')
-
-
-
-
-

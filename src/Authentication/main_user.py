@@ -27,6 +27,7 @@ def user_managment(user_object):
               "later")
         user_managment(user)
 
+
 def admin(user_object):
 
     user = user_object
@@ -72,4 +73,3 @@ def admin(user_object):
     else:
         "Wrong command please try again."
         admin(user)
-
