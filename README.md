@@ -70,8 +70,8 @@ list of file and brief Description of functionality
 * `requirements.txt`
 * `server.py`
 * `session.py`
-* `Authentication.py`
-* `Authentication_checker.py`
+* `Authentication.py` creates new user and/or new user object
+* `Authentication_checker.py`contains password hashing function, user authentication checker fuction and password strength function
 * `Classes.py`
 * `Input_checker.py`
 * `database.py`
@@ -79,8 +79,8 @@ list of file and brief Description of functionality
 * `database_managment.py`
 * `main.py`
 * `main_user.py`
-* `AuthorisationDataBase.py`
-* `authorisation.py`
+* `AuthorisationDataBase.py` creates database to store authorisation data
+* `authorisation.py` defines authorisation class 
 * `crud.py`
 * `crud_server.py`
 * `db_and_table.py`
