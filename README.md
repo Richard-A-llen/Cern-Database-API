@@ -55,8 +55,9 @@ The programme requirements :
 * Flask 2.2.2 
 * SQLite
 * Pycryptodome
+* readerwriterlock
 ### How to run
-Execute `client.py` to demostrate download (change variable for file_name). To demostrate upload for security reasons file just supports PDF, TXT and DB.
+'python server.py' will run startup a flask service, and listen on 8080 port. The server enables https with self-signed ssl certificatoin, and it was binding on the 127.0.0.1. If you use a browser to send the request, it could indicate a safety risk. But you can use client.py to send command to the server side. Execute `client.py` to demostrate download (change variable for file_name). To demostrate upload for security reasons file just supports PDF, TXT and ZIP.
 ## 5. Project files
 List of files and brief description of functionality
 * `Encryptor.py` defines `Encryptor` class, minimise brute force attacks 
