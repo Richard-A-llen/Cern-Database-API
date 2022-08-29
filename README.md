@@ -64,7 +64,7 @@ list of file and brief Description of functionality
 * `Encryptor.py` defines `Encryptor` class, minimise brute force attacks 
 * `client.py`
 * `database_cern.py` defines initial connection to database
-* `flask_cert.pem` CERTIFICATE
+* `flask_cert.pem` holds flask certificate 
 * `flask_private-key.pem` Private key
 * `plaeholder.txt`
 * `requirements.txt`
